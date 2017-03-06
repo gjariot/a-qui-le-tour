@@ -18,16 +18,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(message);
+        String message = intent.getStringExtra(ActivityCreation.ACTIVITY_LABEL);
 
         ActivityDataSource datasource = new ActivityDataSource(new MySQLite(this));
         Activity activity = new Activity();
         activity.setLabel(message);
 
         datasource.insert(activity);
+
+        // Capture the layout's TextView and set the string as its text
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("L'activité " + message + " a bien été enregistrée.");
     }
 }

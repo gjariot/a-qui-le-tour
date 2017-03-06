@@ -16,10 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayMessageActivity" android:parentActivityName=".MainActivity">
+        <activity
+            android:name=".DisplayMessageActivity"
+            android:parentActivityName=".ActivityCreation">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"></meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".ActivityCreation"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

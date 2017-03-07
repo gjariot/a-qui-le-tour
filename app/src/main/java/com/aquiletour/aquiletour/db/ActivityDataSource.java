@@ -53,4 +53,9 @@ public class ActivityDataSource {
             .setId(entry.getLong(0))
             .setLabel(entry.getString(1));
     }
+
+    public void delete(Activity activity) {
+        String[] clause = {String.valueOf(activity.getId())};
+        this.db.getWritableDatabase().delete(ActivityContract.Activity.TABLE_NAME, ActivityContract.Activity._ID + " = ?", clause);
+    }
 }

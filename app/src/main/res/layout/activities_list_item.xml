@@ -16,11 +16,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></TextView>
-    <Button
+
+    <ImageButton
         android:id="@+id/activities_list__item__delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/activities_list.delete_button"
+        android:src="@drawable/ic_delete_forever_black_24dp"
+        android:background="@color/colorBackground"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

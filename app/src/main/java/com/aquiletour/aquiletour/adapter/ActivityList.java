@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.aquiletour.aquiletour.MainActivity;
@@ -53,18 +54,19 @@ public class ActivityList extends BaseAdapter {
         textView.setText(activity.getLabel());
 
         rowView.setTag(R.id.activity_id, activity.getId());
-        ActivityList adapter = this;
+        final ActivityList adapter = this;
 
-        Button deleteActivity = (Button) rowView.findViewById(R.id.activities_list__item__delete_button);
+        ImageButton deleteActivity = (ImageButton) rowView.findViewById(R.id.activities_list__item__delete_button);
         deleteActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 ActivityDataSource datasource = new ActivityDataSource(new MySQLite(view.getContext()));
                 datasource.delete(activity);
+
+                adapter.activities.remove(activity);
+                adapter.notifyDataSetChanged();
             }
         });
 
         return rowView;
     }
-
-
 }

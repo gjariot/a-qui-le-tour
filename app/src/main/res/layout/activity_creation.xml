@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.aquiletour.aquiletour.ActivityCreation">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="62dp"
         android:inputType="text"
-        android:text="@string/create_activity.label_input"
+        android:hint="@string/create_activity.label_input"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp" />
 
     <Button
         android:id="@+id/button"
@@ -28,5 +40,7 @@
         app:layout_constraintLeft_toRightOf="@+id/editText"
         android:layout_marginLeft="8dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.507" />
+        app:layout_constraintHorizontal_bias="0.507"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp" />
 </android.support.constraint.ConstraintLayout>

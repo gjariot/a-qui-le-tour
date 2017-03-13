@@ -2,9 +2,14 @@ package com.aquiletour.aquiletour;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,9 +33,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(toolbar);
 
         this.loadActivities();
-        this.loadActions();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.toolbar__create_activity) {
+            this.displayCreationForm();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadActivities() {
@@ -40,24 +61,6 @@ public class MainActivity extends AppCompatActivity {
         this.adapter = new ActivityList(activities, this);
         ListView listView = (ListView) this.findViewById(R.id.activities_list);
         listView.setAdapter(adapter);
-    }
-
-    private void loadActions() {
-        ArrayList<String> actions = new ArrayList<String>();
-        actions.add("Créer une activité");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.actions_list, actions);
-        ListView listView = (ListView) this.findViewById(R.id.actions_list);
-        listView.setAdapter(adapter);
-
-        // Create a message handling object as an anonymous class.
-        AdapterView.OnItemClickListener clickHandler = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id)  {
-                MainActivity.this.displayCreationForm();
-            }
-        };
-
-        listView.setOnItemClickListener(clickHandler);
     }
 
     public void displayCreationForm() {

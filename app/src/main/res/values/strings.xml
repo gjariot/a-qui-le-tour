@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">A qui le tour?</string>
-    <string name="create_activity.label_input">Enter a message</string>
+    <string name="create_activity.label_label">Activity label</string>
+    <string name="create_activity.label_input">Clean the toilets?</string>
+    <string name="create_activity.add_participants">Add participants</string>
+    <string name="create_activity.participant_name_input">Enter participant name</string>
     <string name="create_activity.submit_button">Créer une activité</string>
     <string name="activities_list.delete_button">Supprimer</string>
     <item type="id" name="activity_id"/>

@@ -34,9 +34,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         this.setSupportActionBar(toolbar);
 
+        /*MySQLite db = new MySQLite(this);
+        db.onUpgrade(db.getWritableDatabase(), 1, 1);*/
+
         this.loadActivities();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.adapter.notifyDataSetChanged();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.aquiletour.aquiletour.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MySQLite extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -14,24 +15,22 @@ public class MySQLite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL(this.getDatabaseCreationQuery());
+        this.getDatabaseCreationQuery(database);
     }
 
-    private String getDatabaseCreationQuery() {
-        String instructions = "create table " + ActivityContract.Activity.TABLE_NAME + "(" +
+    private void getDatabaseCreationQuery(SQLiteDatabase database) {
+        database.execSQL("create table " + ActivityContract.Activity.TABLE_NAME + "(" +
                 ActivityContract.Activity._ID + " integer primary key autoincrement, " +
-                ActivityContract.Activity.COLUMN_NAME_LABEL + " text not null);";
+                ActivityContract.Activity.COLUMN_NAME_LABEL + " text not null);");
 
-        instructions += "create table " + ActivityContract.Participant.TABLE_NAME + "(" +
+        database.execSQL("create table " + ActivityContract.Participant.TABLE_NAME + "(" +
                 ActivityContract.Participant._ID + " integer primary key autoincrement, " +
-                ActivityContract.Participant.COLUMN_NAME_NAME + " text not null);";
+                ActivityContract.Participant.COLUMN_NAME_NAME + " text not null);");
 
-        instructions += "create table " + ActivityContract.ActivityParticipants.TABLE_NAME + "(" +
+        database.execSQL("create table " + ActivityContract.ActivityParticipants.TABLE_NAME + "(" +
                 ActivityContract.ActivityParticipants._ID + " integer primary key autoincrement, " +
-                ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " integer not null " +
-                ActivityContract.ActivityParticipants.COLUMN_NAME_PARTICIPANT + " integer not null);";
-
-        return instructions;
+                ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " integer not null, " +
+                ActivityContract.ActivityParticipants.COLUMN_NAME_PARTICIPANT + " integer not null);");
     }
 
     @Override

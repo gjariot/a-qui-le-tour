@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.aquiletour.aquiletour.entity.Activity;
+import com.aquiletour.aquiletour.entity.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,24 @@ public class ActivityDataSource {
 
         activity.setId(id);
         return activity;
+    }
+
+    public Participant insert(Participant participant) {
+        ContentValues values = new ContentValues();
+        values.put(ActivityContract.Participant.COLUMN_NAME_NAME, participant.getName());
+
+        long id = this.db.getWritableDatabase().insert(ActivityContract.Participant.TABLE_NAME, null, values);
+
+        participant.setId(id);
+        return participant;
+    }
+
+    public void insertActivityParticipant(Activity activity, Participant participant) {
+        ContentValues values = new ContentValues();
+        values.put(ActivityContract.ActivityParticipants.COLUMN_NAME_PARTICIPANT, participant.getId());
+        values.put(ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY, activity.getId());
+
+        this.db.getWritableDatabase().insert(ActivityContract.ActivityParticipants.TABLE_NAME, null, values);
     }
 
     public List<Activity> getAll() {
@@ -56,6 +75,7 @@ public class ActivityDataSource {
 
     public void delete(Activity activity) {
         String[] clause = {String.valueOf(activity.getId())};
+        this.db.getWritableDatabase().delete(ActivityContract.ActivityParticipants.TABLE_NAME, ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " = ?", clause);
         this.db.getWritableDatabase().delete(ActivityContract.Activity.TABLE_NAME, ActivityContract.Activity._ID + " = ?", clause);
     }
 }

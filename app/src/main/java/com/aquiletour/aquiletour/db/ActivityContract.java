@@ -20,4 +20,11 @@ public final class ActivityContract {
         public static final String COLUMN_NAME_ACTIVITY = "activity_id";
         public static final String COLUMN_NAME_PARTICIPANT = "participant_id";
     }
+
+    public static class ActivityParticipation implements BaseColumns {
+        public static final String TABLE_NAME = "activity_participation";
+        public static final String COLUMN_NAME_ACTIVITY = "activity_id";
+        public static final String COLUMN_NAME_PARTICIPANT = "participant_id";
+        public static final String COLUMN_NAME_DATE = "date";
+    }
 }

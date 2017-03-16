@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;
 import com.aquiletour.aquiletour.entity.Activity;
+import com.aquiletour.aquiletour.entity.Participant;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
@@ -35,6 +36,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
         activity.setLabel(message);
 
         datasource.insert(activity);
+
+        String[] participants = intent.getStringArrayExtra(ActivityCreation.ACTIVITY_PARTICIPANTS);
+        for (int index = 0; index < participants.length; index++) {
+            Participant participant = new Participant();
+            participant.setName(participants[index]);
+
+            datasource.insert(participant);
+            datasource.insertActivityParticipant(activity, participant);
+        }
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = (TextView) findViewById(R.id.textView);

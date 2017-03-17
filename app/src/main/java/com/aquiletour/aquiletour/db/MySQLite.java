@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class MySQLite extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "aquiletour.db";
 
     public MySQLite(Context context) {
@@ -35,10 +35,7 @@ public class MySQLite extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + ActivityContract.Activity.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + ActivityContract.Participant.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + ActivityContract.ActivityParticipants.TABLE_NAME);
-        onCreate(db);
+        Migration migrationHandler = new Migration(db, oldVersion, newVersion);
+        migrationHandler.runMigrationScripts();
     }
-
 }

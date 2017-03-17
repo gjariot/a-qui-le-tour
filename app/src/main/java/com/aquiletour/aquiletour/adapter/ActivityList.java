@@ -2,6 +2,7 @@ package com.aquiletour.aquiletour.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class ActivityList extends BaseAdapter {
         textView.setText(activity.getLabel());
 
         rowView.setTag(R.id.activity_id, activity.getId());
+        rowView.setTag(R.id.position, position);
         final ActivityList adapter = this;
 
         ImageButton deleteActivity = (ImageButton) rowView.findViewById(R.id.activities_list__item__delete_button);

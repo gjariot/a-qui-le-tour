@@ -6,5 +6,8 @@
     <string name="create_activity.participant_name_input">Enter participant name</string>
     <string name="create_activity.submit_button">Créer une activité</string>
     <string name="activities_list.delete_button">Supprimer</string>
+    <string name="activity_participation.activity_name">A qui le tour de %1$s?</string>
+    <string name="activity_participation.participate_button">C\'est fait!</string>
     <item type="id" name="activity_id"/>
+    <item type="id" name="position"/>
 </resources>

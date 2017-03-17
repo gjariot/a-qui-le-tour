@@ -13,9 +13,10 @@
         android:padding="10dip"
         android:textSize="16dip"
         android:textStyle="bold"
+        android:onClick="showActivity"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></TextView>
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/activities_list__item__delete_button"

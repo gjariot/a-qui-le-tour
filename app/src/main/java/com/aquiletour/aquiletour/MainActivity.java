@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -64,9 +66,21 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showActivity(View view)
+    {
+        View parentView = (View) view.getParent();
+        int position = (int) parentView.getTag(R.id.position);
+        Activity activity = this.adapter.getItem(position);
+
+        Intent intent = new Intent(this, ActivityParticipation.class);
+        intent.putExtra(ActivityParticipation.ACTIVITY, activity);
+        startActivity(intent);
+    }
+
     private void loadActivities() {
         ActivityDataSource datasource = new ActivityDataSource(new MySQLite(this));
         List<Activity> activities = datasource.getAll();
+        datasource.close();
 
         this.adapter = new ActivityList(activities, this);
         ListView listView = (ListView) this.findViewById(R.id.activities_list);

@@ -28,4 +28,10 @@ public class Participant {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Participant participant = (Participant) obj;
+        return this.id == participant.getId();
+    }
 }

@@ -50,15 +50,11 @@ public class ActivityParticipation extends ActivityWithToolbar {
         datasource.loadParticipants(this.activity);
         datasource.close();
 
-        Log.d(this.getClass().toString(), "Participant trouvé? " + (lastParticipant == null ? "Non" : "Oui! " + lastParticipant.getName()));
-
         if (lastParticipant == null) {
             return this.activity.getParticipants().get(0);
         }
 
         int participantPosition = this.activity.getParticipants().indexOf(lastParticipant);
-
-        Log.d(this.getClass().toString(), "Position du participant: " + String.valueOf(participantPosition));
 
         return this.activity.getParticipants().get(
             (this.activity.getParticipants().size() + participantPosition + 1) % this.activity.getParticipants().size()

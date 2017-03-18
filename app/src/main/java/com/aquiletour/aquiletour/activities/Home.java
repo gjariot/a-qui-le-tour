@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.aquiletour.aquiletour.activities.ActivityParticipation;
 import com.aquiletour.aquiletour.R;
 import com.aquiletour.aquiletour.adapter.ActivityList;
 import com.aquiletour.aquiletour.db.ActivityDataSource;
@@ -15,8 +14,13 @@ import com.aquiletour.aquiletour.entity.Activity;
 
 import java.util.List;
 
-
+/**
+ * Home of application: list activities
+ */
 public class Home extends ActivityWithToolbar {
+    /**
+     * Adapter used for the activites list view
+     */
     public ActivityList adapter;
 
     @Override
@@ -46,6 +50,10 @@ public class Home extends ActivityWithToolbar {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Launch activity to see clicked activity's details
+     * @param view
+     */
     public void showActivity(View view)
     {
         View parentView = (View) view.getParent();
@@ -57,18 +65,23 @@ public class Home extends ActivityWithToolbar {
         startActivity(intent);
     }
 
+    /**
+     * Load activities and assign them to the listView item
+     */
     private void loadActivities() {
-        ActivityDataSource datasource = new ActivityDataSource(new MySQLite(this));
-        List<Activity> activities = datasource.getAll();
-        datasource.close();
+        ActivityDataSource dataSource = new ActivityDataSource(new MySQLite(this));
+        List<Activity> activities = dataSource.getAll();
+        dataSource.close();
 
         this.adapter = new ActivityList(activities, this);
         ListView listView = (ListView) this.findViewById(R.id.activities_list);
         listView.setAdapter(adapter);
     }
 
+    /**
+     * Display creation form after click on the add activity button
+     */
     public void displayCreationForm() {
-        Intent intent = new Intent(this, ActivityCreation.class);
-        startActivity(intent);
+        this.startActivity(new Intent(this, ActivityCreation.class));
     }
 }

@@ -23,9 +23,6 @@ public class Home extends ActivityWithToolbar {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*MySQLite db = new MySQLite(this);
-        db.onUpgrade(db.getWritableDatabase(), 1, 1);*/
-
         this.loadActivities();
     }
 

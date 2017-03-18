@@ -3,7 +3,6 @@ package com.aquiletour.aquiletour.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class MySQLite extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 3;
@@ -15,10 +14,6 @@ public class MySQLite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        this.getDatabaseCreationQuery(database);
-    }
-
-    private void getDatabaseCreationQuery(SQLiteDatabase database) {
         database.execSQL("create table " + ActivityContract.Activity.TABLE_NAME + "(" +
                 ActivityContract.Activity._ID + " integer primary key autoincrement, " +
                 ActivityContract.Activity.COLUMN_NAME_LABEL + " text not null);");
@@ -31,11 +26,15 @@ public class MySQLite extends SQLiteOpenHelper {
                 ActivityContract.ActivityParticipants._ID + " integer primary key autoincrement, " +
                 ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " integer not null, " +
                 ActivityContract.ActivityParticipants.COLUMN_NAME_PARTICIPANT + " integer not null);");
+
+        database.execSQL("create table " + ActivityContract.ActivityParticipation.TABLE_NAME + "(" +
+                ActivityContract.ActivityParticipation._ID + " integer primary key autoincrement, " +
+                ActivityContract.ActivityParticipation.COLUMN_NAME_ACTIVITY + " integer not null, " +
+                ActivityContract.ActivityParticipation.COLUMN_NAME_PARTICIPANT + " integer not null, " +
+                ActivityContract.ActivityParticipation.COLUMN_NAME_DATE + " integer not null);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Migration migrationHandler = new Migration(db, oldVersion, newVersion);
-        migrationHandler.runMigrationScripts();
     }
 }

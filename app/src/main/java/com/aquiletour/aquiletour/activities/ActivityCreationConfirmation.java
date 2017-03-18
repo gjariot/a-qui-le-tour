@@ -29,11 +29,11 @@ public class ActivityCreationConfirmation extends ActivityWithToolbar {
     {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra(ActivityCreation.ACTIVITY_LABEL);
+        String activityLabel = intent.getStringExtra(ActivityCreation.ACTIVITY_LABEL);
 
         ActivityDataSource datasource = new ActivityDataSource(new MySQLite(this));
         Activity activity = new Activity();
-        activity.setLabel(message);
+        activity.setLabel(activityLabel);
 
         datasource.insert(activity);
 
@@ -46,8 +46,8 @@ public class ActivityCreationConfirmation extends ActivityWithToolbar {
             datasource.insertActivityParticipant(activity, participant);
         }
 
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText("L'activité " + message + " a bien été enregistrée.");
+        ((TextView) this.findViewById(R.id.create_activity__confirmation_message)).setText(
+            this.getResources().getString(R.string.create_activity_confirmation_message, activity.getLabel())
+        );
     }
 }

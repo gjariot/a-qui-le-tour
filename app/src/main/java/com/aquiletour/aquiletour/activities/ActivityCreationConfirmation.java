@@ -1,28 +1,28 @@
-package com.aquiletour.aquiletour;
+package com.aquiletour.aquiletour.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.aquiletour.aquiletour.R;
 import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;
 import com.aquiletour.aquiletour.entity.Activity;
 import com.aquiletour.aquiletour.entity.Participant;
 
-public class DisplayMessageActivity extends AppCompatActivity {
+public class ActivityCreationConfirmation extends ActivityWithToolbar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_message);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        this.setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.saveActivity();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_display_message;
     }
 
     private void saveActivity()

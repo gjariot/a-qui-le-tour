@@ -1,18 +1,13 @@
 package com.aquiletour.aquiletour.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.aquiletour.aquiletour.MainActivity;
 import com.aquiletour.aquiletour.R;
 import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;

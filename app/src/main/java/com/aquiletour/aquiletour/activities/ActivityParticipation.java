@@ -1,26 +1,17 @@
-package com.aquiletour.aquiletour;
+package com.aquiletour.aquiletour.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.aquiletour.aquiletour.adapter.ActivityList;
-import com.aquiletour.aquiletour.db.ActivityContract;
+import com.aquiletour.aquiletour.R;
 import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;
 import com.aquiletour.aquiletour.entity.Activity;
 import com.aquiletour.aquiletour.entity.Participant;
 
-import java.util.List;
-
-public class ActivityParticipation extends AppCompatActivity {
+public class ActivityParticipation extends ActivityWithToolbar {
     public static final String ACTIVITY = "com.aquiletour.aquiletour.ACTIVITY";
 
     private Activity activity;
@@ -29,14 +20,16 @@ public class ActivityParticipation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_participation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        this.setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.activity = (Activity) this.getIntent().getSerializableExtra(ACTIVITY);
         this.assignActivity();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_participation;
     }
 
     private void assignActivity()

@@ -24,10 +24,4 @@ abstract public class ActivityWithToolbar extends AppCompatActivity {
      * @return int The layout identifier as defined in R.layout
      */
     abstract protected int getLayoutId();
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }

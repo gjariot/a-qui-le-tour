@@ -2,6 +2,7 @@ package com.aquiletour.aquiletour.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -28,6 +29,12 @@ public class Home extends ActivityWithToolbar {
         super.onCreate(savedInstanceState);
 
         this.loadActivities();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

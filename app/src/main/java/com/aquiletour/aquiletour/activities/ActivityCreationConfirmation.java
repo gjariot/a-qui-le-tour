@@ -2,6 +2,7 @@ package com.aquiletour.aquiletour.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.aquiletour.aquiletour.R;
@@ -9,6 +10,8 @@ import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;
 import com.aquiletour.aquiletour.entity.Activity;
 import com.aquiletour.aquiletour.entity.Participant;
+
+import java.util.List;
 
 public class ActivityCreationConfirmation extends ActivityWithToolbar {
 
@@ -37,10 +40,10 @@ public class ActivityCreationConfirmation extends ActivityWithToolbar {
 
         datasource.insert(activity);
 
-        String[] participants = intent.getStringArrayExtra(ActivityCreation.ACTIVITY_PARTICIPANTS);
-        for (int index = 0; index < participants.length; index++) {
-            Participant participant = new Participant();
-            participant.setName(participants[index]);
+        List<Participant> participants = (List<Participant>) intent.getSerializableExtra(ActivityCreation.ACTIVITY_PARTICIPANTS);
+
+        for (int index = 0; index < participants.size(); index++) {
+            Participant participant = participants.get(index);
 
             datasource.insert(participant);
             datasource.insertActivityParticipant(activity, participant);

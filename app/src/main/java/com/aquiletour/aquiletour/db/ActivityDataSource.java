@@ -30,6 +30,7 @@ public class ActivityDataSource {
     public Participant insert(Participant participant) {
         ContentValues values = new ContentValues();
         values.put(ActivityContract.Participant.COLUMN_NAME_NAME, participant.getName());
+        values.put(ActivityContract.Participant.COLUMN_NAME_PICTURE, participant.getPicture());
 
         long id = this.db.getWritableDatabase().insert(ActivityContract.Participant.TABLE_NAME, null, values);
 
@@ -39,7 +40,7 @@ public class ActivityDataSource {
 
     public Participant getLastParticipantFromActivity(Activity activity) {
         String[] clause = {String.valueOf(activity.getId())};
-        Cursor cursor = this.db.getReadableDatabase().rawQuery("SELECT pa._id, pa.name FROM participant pa INNER JOIN activity_participation pc ON (pa._id = pc.participant_id) WHERE activity_id = ? ORDER BY date DESC LIMIT 1", clause);
+        Cursor cursor = this.db.getReadableDatabase().rawQuery("SELECT pa._id, pa.name, pa.picture FROM participant pa INNER JOIN activity_participation pc ON (pa._id = pc.participant_id) WHERE activity_id = ? ORDER BY date DESC LIMIT 1", clause);
 
         if (cursor.getCount() == 0) {
             return null;
@@ -94,7 +95,8 @@ public class ActivityDataSource {
         Participant participant = new Participant();
         return participant
                 .setId(entry.getLong(0))
-                .setName(entry.getString(1));
+                .setName(entry.getString(1))
+                .setPicture(entry.getString(2));
     }
 
     public void delete(Activity activity) {
@@ -122,7 +124,7 @@ public class ActivityDataSource {
         List<Participant> participants = new ArrayList<Participant>();
 
         String[] clause = {String.valueOf(activity.getId())};
-        Cursor cursor = this.db.getReadableDatabase().rawQuery("SELECT p._id, p.name FROM participant p INNER JOIN activity_participant ap ON (p._id = ap.participant_id) WHERE activity_id = ?", clause);
+        Cursor cursor = this.db.getReadableDatabase().rawQuery("SELECT p._id, p.name, p.picture FROM participant p INNER JOIN activity_participant ap ON (p._id = ap.participant_id) WHERE activity_id = ?", clause);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

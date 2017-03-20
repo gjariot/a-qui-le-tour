@@ -13,6 +13,7 @@ public final class ActivityContract {
     public static class Participant implements BaseColumns {
         public static final String TABLE_NAME = "participant";
         public static final String COLUMN_NAME_NAME = "name";
+        public static final String COLUMN_NAME_PICTURE = "picture";
     }
 
     public static class ActivityParticipants implements BaseColumns {

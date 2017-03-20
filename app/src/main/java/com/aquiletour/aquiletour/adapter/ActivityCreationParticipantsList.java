@@ -1,7 +1,6 @@
 package com.aquiletour.aquiletour.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.aquiletour.aquiletour.R;
-import com.aquiletour.aquiletour.db.ActivityDataSource;
-import com.aquiletour.aquiletour.db.MySQLite;
-import com.aquiletour.aquiletour.entity.Activity;
+import com.aquiletour.aquiletour.entity.Participant;
 
 import java.util.List;
 
 public class ActivityCreationParticipantsList extends BaseAdapter {
-    public List<String> participants;
+    public List<Participant> participants;
     private Context context;
 
-    public ActivityCreationParticipantsList(List<String> participants, Context context) {
+    public ActivityCreationParticipantsList(List<Participant> participants, Context context) {
         this.participants = participants;
         this.context = context;
     }
@@ -32,7 +29,11 @@ public class ActivityCreationParticipantsList extends BaseAdapter {
 
     @Override
     public String getItem(int position) {
-        return this.participants.get(position);
+        return this.participants.get(position).getName();
+    }
+
+    public List<Participant> getParticipants() {
+        return this.participants;
     }
 
     @Override

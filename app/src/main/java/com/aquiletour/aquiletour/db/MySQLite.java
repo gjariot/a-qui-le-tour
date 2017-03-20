@@ -3,9 +3,10 @@ package com.aquiletour.aquiletour.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MySQLite extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "aquiletour.db";
 
     public MySQLite(Context context) {
@@ -20,6 +21,7 @@ public class MySQLite extends SQLiteOpenHelper {
 
         database.execSQL("create table " + ActivityContract.Participant.TABLE_NAME + "(" +
                 ActivityContract.Participant._ID + " integer primary key autoincrement, " +
+                ActivityContract.Participant.COLUMN_NAME_PICTURE + " text null, " +
                 ActivityContract.Participant.COLUMN_NAME_NAME + " text not null);");
 
         database.execSQL("create table " + ActivityContract.ActivityParticipants.TABLE_NAME + "(" +

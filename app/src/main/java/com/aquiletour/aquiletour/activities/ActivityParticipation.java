@@ -1,8 +1,12 @@
 package com.aquiletour.aquiletour.activities;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aquiletour.aquiletour.R;
@@ -10,6 +14,8 @@ import com.aquiletour.aquiletour.db.ActivityDataSource;
 import com.aquiletour.aquiletour.db.MySQLite;
 import com.aquiletour.aquiletour.entity.Activity;
 import com.aquiletour.aquiletour.entity.Participant;
+
+import java.io.File;
 
 public class ActivityParticipation extends ActivityWithToolbar {
     public static final String ACTIVITY = "com.aquiletour.aquiletour.ACTIVITY";
@@ -40,6 +46,13 @@ public class ActivityParticipation extends ActivityWithToolbar {
 
         this.participant = this.getCurrentParticipant();
         ((TextView) this.findViewById(R.id.activity_participation__participant_name)).setText(this.participant.getName());
+
+        File picture = new File(this.participant.getPicture());
+        ImageView participantPicture = (ImageView) this.findViewById(R.id.activity_participation__participant_picture);
+        participantPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getAbsolutePath()));
+        participantPicture.setRotation(90);
+
+        Log.d("ActivityParticipation", this.participant.getPicture());
     }
 
     private Participant getCurrentParticipant()

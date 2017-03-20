@@ -1,9 +1,13 @@
 package com.aquiletour.aquiletour.entity;
 
-public class Participant {
+import java.io.Serializable;
+
+public class Participant implements Serializable {
     private long id;
 
     private String name;
+
+    private String picture;
 
     public long getId() {
         return id;
@@ -33,5 +37,14 @@ public class Participant {
     public boolean equals(Object obj) {
         Participant participant = (Participant) obj;
         return this.id == participant.getId();
+    }
+
+    public String getPicture() {
+        return this.picture;
+    }
+
+    public Participant setPicture(String picture) {
+        this.picture = picture;
+        return this;
     }
 }

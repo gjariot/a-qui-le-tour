@@ -5,12 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="6dip">
 
-    <ImageView
-        android:id="@+id/activity_participation__participant_picture"
-        android:scaleType="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
@@ -33,16 +27,27 @@
         android:textSize="26sp"
         android:textAlignment="center" />
 
+    <ImageView
+        android:id="@+id/activity_participation__participant_picture"
+        android:scaleType="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_participation__activity_name"
+        />
+
     <TextView
         android:id="@+id/activity_participation__participant_name"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         app:layout_constraintTop_toBottomOf="@id/activity_participation__activity_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_below="@+id/activity_participation__activity_name"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
         android:textSize="46sp"
         android:textAlignment="center"
+        android:background="@color/colorBackground50Alpha"
+        android:padding="5dp"
          />
 
     <Button
@@ -53,7 +58,6 @@
         android:text="@string/activity_participation.participate_button"
         android:onClick="addParticipation"
         android:layout_marginBottom="15dp"
-        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -1,7 +1,9 @@
 package com.aquiletour.aquiletour.activities;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,7 +52,14 @@ public class ActivityParticipation extends ActivityWithToolbar {
         if (this.participant.getPicture() != null) {
             File picture = new File(this.participant.getPicture());
             ImageView participantPicture = (ImageView) this.findViewById(R.id.activity_participation__participant_picture);
-            participantPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getAbsolutePath()));
+
+            Point screensize = new Point();
+            this.getWindowManager().getDefaultDisplay().getSize(screensize);
+            int expectedWidth = screensize.x;
+            Bitmap pictureBmp = BitmapFactory.decodeFile(picture.getAbsolutePath());
+            int expectedHeight = (int) (pictureBmp.getWidth() * expectedWidth / pictureBmp.getHeight());
+
+            participantPicture.setImageBitmap(Bitmap.createScaledBitmap(pictureBmp, expectedHeight, expectedWidth, true));
             participantPicture.setRotation(90);
         } else {
             this.findViewById(R.id.activity_participation__participant_picture).setVisibility(View.INVISIBLE);

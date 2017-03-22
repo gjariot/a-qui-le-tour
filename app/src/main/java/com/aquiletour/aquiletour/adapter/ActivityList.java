@@ -1,6 +1,8 @@
 package com.aquiletour.aquiletour.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,15 +59,39 @@ public class ActivityList extends BaseAdapter {
 
         ImageButton deleteActivity = (ImageButton) rowView.findViewById(R.id.activities_list__item__delete_button);
         deleteActivity.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                ActivityDataSource datasource = new ActivityDataSource(new MySQLite(view.getContext()));
-                datasource.delete(activity);
+            public void onClick(final View view) {
+                adapter.buildConfirmationDialog(activity, new Runnable() {
+                    public void run() {
+                        ActivityDataSource dataSource = new ActivityDataSource(new MySQLite(view.getContext()));
+                        dataSource.delete(activity);
 
-                adapter.activities.remove(activity);
-                adapter.notifyDataSetChanged();
+                        adapter.activities.remove(activity);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).show();
             }
         });
 
         return rowView;
+    }
+
+    private AlertDialog buildConfirmationDialog(Activity activity, final Runnable callback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+
+        builder.setMessage(this.context.getResources().getString(R.string.activities_list_delete_dialog_message, activity.getLabel()))
+                .setTitle(R.string.activities_list_delete_dialog_title);
+
+        builder.setPositiveButton(R.string.activities_list_delete_dialog_confirmation_button, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                callback.run();
+            }
+        });
+        builder.setNegativeButton(R.string.activities_list_delete_dialog_cancellation_button, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        return builder.create();
     }
 }

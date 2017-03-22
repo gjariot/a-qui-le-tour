@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/activities_list__item__label"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"

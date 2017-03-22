@@ -47,7 +47,9 @@ public class ActivityList extends BaseAdapter {
         final Activity activity = this.getItem(position);
 
         TextView textView = (TextView) rowView.findViewById(R.id.activities_list__item__label);
-        textView.setText(activity.getLabel());
+        textView.setText(
+            this.context.getResources().getString(R.string.activities_list_activity_label, activity.getLabel())
+        );
 
         rowView.setTag(R.id.activity_id, activity.getId());
         rowView.setTag(R.id.position, position);

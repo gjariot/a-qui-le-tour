@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ActivityCreation extends ActivityWithToolbar {
@@ -40,9 +41,16 @@ public class ActivityCreation extends ActivityWithToolbar {
         super.onCreate(savedInstanceState);
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        List<Participant> participantsList;
+
+        if (savedInstanceState != null) {
+            participantsList = (List<Participant>) savedInstanceState.getSerializable("participants");
+        } else {
+            participantsList = new ArrayList<Participant>();
+        }
 
         ListView participants = (ListView) this.findViewById(R.id.create_activity___participants_list);
-        this.participantsListAdapter = new ActivityCreationParticipantsList(new ArrayList<Participant>(), this);
+        this.participantsListAdapter = new ActivityCreationParticipantsList(participantsList, this);
         participants.setAdapter(this.participantsListAdapter);
 
         if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) == false) {
@@ -71,10 +79,8 @@ public class ActivityCreation extends ActivityWithToolbar {
 
         Participant participant = new Participant();
         participant.setName(participantAdd.getText().toString()).setPicture(ActivityCreation.participantPicture);
-        Log.d("ActivityCreation", "Picture: " + ActivityCreation.participantPicture);
-        Log.d("ActivityCreation", "Participant: " + participant.getName() + " / " + participant.getPicture());
 
-        this.participantsListAdapter.participants.add(participant);
+        this.participantsListAdapter.getParticipants().add(participant);
         this.participantsListAdapter.notifyDataSetChanged();
         participantAdd.setText("");
     }
@@ -121,8 +127,12 @@ public class ActivityCreation extends ActivityWithToolbar {
 
         ActivityCreation.participantPicture = image.getAbsolutePath();
 
-        Log.d("ActivityCreation", "getPictures(): " + ActivityCreation.participantPicture);
-
         return image;
+    }
+
+    public void onSaveInstanceState(Bundle savedState) {
+        super.onSaveInstanceState(savedState);
+
+        savedState.putSerializable("participants", (Serializable) this.participantsListAdapter.getParticipants());
     }
 }

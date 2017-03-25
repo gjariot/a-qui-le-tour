@@ -5,6 +5,7 @@
     <string name="create_activity.add_participants">Liste des participants</string>
     <string name="create_activity.participant_name_input">Nom du participant</string>
     <string name="create_activity.submit_button">Créer une activité</string>
+    <string name="create_activity.show_created_activity">Voir qui est le prochain.</string>
     <string name="activities_list.delete_button">Supprimer</string>
     <string name="activities_list.delete_dialog.message">Êtes-vous sûr de vouloir supprimer l\'activité %1$s?\nCette action est irréversible.</string>
     <string name="activities_list.delete_dialog.title">Suppression d\'une activité</string>

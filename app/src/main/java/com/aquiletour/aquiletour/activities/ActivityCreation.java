@@ -82,7 +82,9 @@ public class ActivityCreation extends ActivityWithToolbar {
 
         this.participantsListAdapter.getParticipants().add(participant);
         this.participantsListAdapter.notifyDataSetChanged();
+
         participantAdd.setText("");
+        this.findViewById(R.id.create_activity___participant_picture).setVisibility(View.INVISIBLE);
     }
 
     public void addPicture(View view) {
@@ -112,6 +114,7 @@ public class ActivityCreation extends ActivityWithToolbar {
             Log.d("ActivityCreation", "onActivityResult(): " + ActivityCreation.participantPicture);
             ImageView thumbnail = (ImageView) this.findViewById(R.id.create_activity___participant_picture);
             thumbnail.setImageBitmap(BitmapFactory.decodeFile(ActivityCreation.participantPicture));
+            thumbnail.setRotation(90);
             thumbnail.setVisibility(View.VISIBLE);
         }
     }

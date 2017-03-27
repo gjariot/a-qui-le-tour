@@ -28,7 +28,7 @@ public class ActivityCreationConfirmation extends ActivityWithToolbar {
         return R.layout.activity_display_message;
     }
 
-    private void saveActivity()
+    protected void saveActivity()
     {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();

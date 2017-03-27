@@ -19,19 +19,19 @@
         </activity>
         <activity
             android:name=".activities.ActivityCreationConfirmation"
-            android:parentActivityName=".activities.ActivityCreation">
-
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.Home" />
-        </activity>
+            android:parentActivityName=".activities.ActivityCreation" />
+        <activity
+            android:name=".activities.ActivityEditionConfirmation"
+            android:parentActivityName=".activities.ActivityEdition" />
         <activity
             android:name=".activities.ActivityCreation"
             android:parentActivityName=".activities.Home" />
         <activity
             android:name=".activities.ActivityParticipation"
             android:parentActivityName=".activities.Home" />
+        <activity
+            android:name=".activities.ActivityEdition"
+            android:parentActivityName=".activities.ActivityParticipation" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.aquiletour.aquiletour.fileprovider"

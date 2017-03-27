@@ -34,7 +34,7 @@ public class ActivityCreation extends ActivityWithToolbar {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    private ActivityCreationParticipantsList participantsListAdapter;
+    protected ActivityCreationParticipantsList participantsListAdapter;
 
     static String participantPicture;
 

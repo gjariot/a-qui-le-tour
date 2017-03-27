@@ -1,5 +1,6 @@
 package com.aquiletour.aquiletour.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -7,6 +8,8 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +36,12 @@ public class ActivityParticipation extends ActivityWithToolbar {
 
         this.activity = (Activity) this.getIntent().getSerializableExtra(ACTIVITY);
         this.assignActivity();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_edition, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -91,5 +100,19 @@ public class ActivityParticipation extends ActivityWithToolbar {
         datasource.insertParticipation(this.activity, this.participant);
 
         this.assignActivity();
+    }
+
+    /**
+     * Display edition form after click on the add activity button
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.toolbar__edit_activity) {
+            Intent intent = new Intent(this, ActivityEdition.class);
+            intent.putExtra(ACTIVITY, this.activity);
+            this.startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

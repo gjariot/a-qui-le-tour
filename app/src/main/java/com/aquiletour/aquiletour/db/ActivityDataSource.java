@@ -27,6 +27,29 @@ public class ActivityDataSource {
         return activity;
     }
 
+    public Activity update(Activity activity) {
+        ContentValues values = new ContentValues();
+        values.put(ActivityContract.Activity.COLUMN_NAME_LABEL, activity.getLabel());
+
+        String[] clause = {String.valueOf(activity.getId())};
+
+        this.db.getWritableDatabase().update(ActivityContract.Activity.TABLE_NAME, values, ActivityContract.Activity._ID + " = ?", clause);
+
+        return activity;
+    }
+
+    public Participant update(Participant participant) {
+        ContentValues values = new ContentValues();
+        values.put(ActivityContract.Participant.COLUMN_NAME_NAME, participant.getName());
+        values.put(ActivityContract.Participant.COLUMN_NAME_PICTURE, participant.getPicture());
+
+        String[] clause = {String.valueOf(participant.getId())};
+
+        this.db.getWritableDatabase().update(ActivityContract.Participant.TABLE_NAME, values, ActivityContract.Participant._ID + " = ?", clause);
+
+        return participant;
+    }
+
     public Participant insert(Participant participant) {
         ContentValues values = new ContentValues();
         values.put(ActivityContract.Participant.COLUMN_NAME_NAME, participant.getName());
@@ -103,6 +126,15 @@ public class ActivityDataSource {
         String[] clause = {String.valueOf(activity.getId())};
         this.db.getWritableDatabase().delete(ActivityContract.ActivityParticipants.TABLE_NAME, ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " = ?", clause);
         this.db.getWritableDatabase().delete(ActivityContract.Activity.TABLE_NAME, ActivityContract.Activity._ID + " = ?", clause);
+    }
+
+    public void deleteParticipant(Activity activity, Participant participant) {
+        String[] clause = {String.valueOf(activity.getId()), String.valueOf(participant.getId())};
+        this.db.getWritableDatabase().delete(
+            ActivityContract.ActivityParticipants.TABLE_NAME,
+            ActivityContract.ActivityParticipants.COLUMN_NAME_ACTIVITY + " = ? AND " + ActivityContract.ActivityParticipants.COLUMN_NAME_PARTICIPANT + " = ?",
+            clause
+        );
     }
 
     public void insertParticipation(Activity activity, Participant participant) {

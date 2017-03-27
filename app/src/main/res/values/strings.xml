@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">A qui le tour?</string>
+    <string name="toolbar.create_activity">Créer une activité</string>
+    <string name="toolbar.edit_activity">Editer l\'activité</string>
     <string name="create_activity.label_label">A qui le tour de </string>
     <string name="create_activity.label_input">sortir les poubelles?</string>
     <string name="create_activity.add_participants">Liste des participants</string>

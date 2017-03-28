@@ -80,7 +80,7 @@ public class ActivityCreation extends ActivityWithToolbar {
         EditText participantAdd = (EditText) this.findViewById(R.id.create_activity__participant_name);
 
         Participant participant = new Participant();
-        participant.setName(participantAdd.getText().toString()).setPicture(ActivityCreation.participantPicture);
+        participant.setName(participantAdd.getText().toString().trim()).setPicture(ActivityCreation.participantPicture);
 
         this.participantsListAdapter.getParticipants().add(participant);
         this.participantsListAdapter.notifyDataSetChanged();

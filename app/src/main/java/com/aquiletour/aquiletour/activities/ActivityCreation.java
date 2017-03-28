@@ -58,6 +58,16 @@ public class ActivityCreation extends ActivityWithToolbar {
         if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) == false) {
             this.findViewById(R.id.create_activity___add_picture_button).setVisibility(View.GONE);
         }
+
+        this.findViewById(R.id.create_activity__participant_name).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus == false) {
+                    InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
     }
 
     @Override
@@ -87,9 +97,6 @@ public class ActivityCreation extends ActivityWithToolbar {
 
         participantAdd.setText("");
         this.findViewById(R.id.create_activity___participant_picture).setVisibility(View.INVISIBLE);
-
-        InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public void addPicture(View view) {

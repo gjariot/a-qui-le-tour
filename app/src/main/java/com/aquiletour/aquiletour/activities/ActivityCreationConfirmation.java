@@ -15,7 +15,7 @@ import com.aquiletour.aquiletour.entity.Participant;
 import java.util.List;
 
 public class ActivityCreationConfirmation extends ActivityWithToolbar {
-    private Activity activity;
+    protected Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class ActivityCreationConfirmation extends ActivityWithToolbar {
     public void showActivity(View view)
     {
         Intent intent = new Intent(this, ActivityParticipation.class);
-        intent.putExtra(ActivityParticipation.ACTIVITY, this.activity = activity);
+        intent.putExtra(ActivityParticipation.ACTIVITY, this.activity);
         startActivity(intent);
     }
 

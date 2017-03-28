@@ -10,13 +10,15 @@ import com.aquiletour.aquiletour.R;
  * Class extended from activities that use a toolbar
  */
 abstract public class ActivityWithToolbar extends AppCompatActivity {
+    protected Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(this.getLayoutId());
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(this.toolbar);
     }
 
     /**

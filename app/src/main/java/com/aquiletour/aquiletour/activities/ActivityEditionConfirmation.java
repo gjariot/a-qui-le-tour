@@ -15,7 +15,6 @@ import com.aquiletour.aquiletour.entity.Participant;
 import java.util.List;
 
 public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
-    private Activity activity;
     private ActivityDataSource dataSource;
 
     protected void saveActivity()
@@ -66,7 +65,6 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
                         currentParticipant.getName().trim() != originalParticipant.getName().trim() ||
                         currentParticipant.getPicture() != originalParticipant.getPicture()
                     ) {
-                        Log.d("ActivityEdition", "Mise à jour de " + currentParticipant.getName() + " vers " + originalParticipant.getName());
                         this.dataSource.update(currentParticipant);
                     }
                 }
@@ -79,7 +77,6 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
             if (currentParticipant.getId() < 1) {
                 this.dataSource.insert(currentParticipant);
                 this.dataSource.insertActivityParticipant(this.activity, currentParticipant);
-                Log.d("ActivityEdition", "Création de " + currentParticipant.getName() + " #" + currentParticipant.getId() + " sur l'activité " + this.activity.getId());
             }
         }
     }

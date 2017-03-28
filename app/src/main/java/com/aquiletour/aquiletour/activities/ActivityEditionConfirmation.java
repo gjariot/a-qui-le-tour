@@ -26,7 +26,7 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
         this.activity = (Activity) intent.getSerializableExtra(ActivityParticipation.ACTIVITY);
 
         this.dataSource = new ActivityDataSource(new MySQLite(this));
-        this.activity.setLabel(activityLabel);
+        this.activity.setLabel(activityLabel.trim());
 
         this.dataSource.update(this.activity);
 
@@ -53,7 +53,6 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
             }
 
             if (participantFound == false) {
-                Log.d("ActivityEdition", "Suppression de " + originalParticipant.getName());
                 this.dataSource.deleteParticipant(this.activity, originalParticipant);
             }
         }
@@ -61,15 +60,13 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
 
     private void updateParticipants(List<Participant> originalParticipants, List<Participant> currentParticipants) {
         for(Participant originalParticipant : originalParticipants) {
-            Log.d("ActivityEdition", "Participant à vérifier: " + originalParticipant.getName() + " #" + originalParticipant.getId());
             for (Participant currentParticipant : currentParticipants) {
-                Log.d("ActivityEdition", "Participant comparé: " + currentParticipant.getName() + " #" + currentParticipant.getId());
                 if (currentParticipant.getId() == originalParticipant.getId()) {
                     if (
-                        currentParticipant.getName() != originalParticipant.getName() ||
+                        currentParticipant.getName().trim() != originalParticipant.getName().trim() ||
                         currentParticipant.getPicture() != originalParticipant.getPicture()
                     ) {
-                        Log.d("ActivityEdition", "Mise à jour de " + currentParticipant.getName() + " #" + currentParticipant.getId());
+                        Log.d("ActivityEdition", "Mise à jour de " + currentParticipant.getName() + " vers " + originalParticipant.getName());
                         this.dataSource.update(currentParticipant);
                     }
                 }
@@ -80,6 +77,7 @@ public class ActivityEditionConfirmation extends ActivityCreationConfirmation {
     private void insertParticipants(List<Participant> currentParticipants) {
         for (Participant currentParticipant : currentParticipants) {
             if (currentParticipant.getId() < 1) {
+                this.dataSource.insert(currentParticipant);
                 this.dataSource.insertActivityParticipant(this.activity, currentParticipant);
                 Log.d("ActivityEdition", "Création de " + currentParticipant.getName() + " #" + currentParticipant.getId() + " sur l'activité " + this.activity.getId());
             }

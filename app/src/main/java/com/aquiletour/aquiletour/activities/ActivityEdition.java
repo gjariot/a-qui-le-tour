@@ -37,6 +37,17 @@ public class ActivityEdition extends ActivityCreation {
         super.onCreate(savedInstanceState);
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final ActivityEdition currentActivity = this;
+        this.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(currentActivity, ActivityParticipation.class);
+                intent.putExtra(ActivityParticipation.ACTIVITY, currentActivity.activity);
+                startActivity(intent);
+            }
+        });
+
         List<Participant> participantsList;
 
         this.activity = (Activity) this.getIntent().getSerializableExtra(ActivityParticipation.ACTIVITY);
@@ -58,8 +69,6 @@ public class ActivityEdition extends ActivityCreation {
         ((EditText) this.findViewById(R.id.activity_label)).setText(this.activity.getLabel());
         Button submitButton = (Button) this.findViewById(R.id.button);
         submitButton.setText(R.string.edit_activity_submit_button);
-
-        final ActivityEdition currentActivity = this;
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
